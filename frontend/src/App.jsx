@@ -40,6 +40,13 @@ function App() {
             }
           />
 
+         <Route 
+            path="/logout"
+            element={
+              <Logout />
+            }
+        />
+        
             <Route 
             path="/register"
             element={
