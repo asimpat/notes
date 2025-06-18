@@ -53,6 +53,7 @@ function App() {
               <RegisterAndLogout/>
             }
           />
+          
 
             <Route 
             path="*"
