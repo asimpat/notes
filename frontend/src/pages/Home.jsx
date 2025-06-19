@@ -4,6 +4,8 @@
 
 import { useEffect, useState } from "react";
 import api from "../api";
+import Note from "../components/Note";
+import "../styles/Home.css"
 
 function Home() {
   const [notes, setNotes] = useState([]);
@@ -35,10 +37,9 @@ function Home() {
         } else {
           alert("Failed to delete");
         }
+        getNotes();
       })
       .catch((err) => err);
-
-    getNotes();
   };
 
   const createNote = (e) => {
@@ -51,15 +52,18 @@ function Home() {
         } else {
           alert("Failed to create note");
         }
+        getNotes();
       })
       .catch((err) => err);
-    getNotes();
   };
 
   return (
     <div>
       <div>
         <h1>Notes</h1>
+        {notes.map((note) => (
+          <Note note={note} onDelete={deleteNote} key={note.id} />
+        ))}
       </div>
       <div>
         <form onSubmit={createNote}>
@@ -82,8 +86,10 @@ function Home() {
             value={content}
             onChange={(e) => setContent(e.target.value)}
           ></textarea>
-          <br />
-          <button type="submit" value="Submit">Submit</button>
+         <br />
+          <button type="submit" value="Submit">
+            Submit
+          </button>
         </form>
       </div>
     </div>
