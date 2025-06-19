@@ -11,7 +11,7 @@ function ProtectedRoute({ children }) {
     auth().catch( () => setIsAuthorized(false))
   }, [])
 
-  const refreshToken = async (params) => {
+  const refreshToken = async () => {
     const refreshToken = localStorage.getItem(REFRESH_TOKEN);
     try {
       // send a request to backend with the refresh token to get a new access token
@@ -51,11 +51,10 @@ function ProtectedRoute({ children }) {
     }
   };
 
-  if (isAuthorized) {
-    return <div>Loading.....</div>;
-  }
+ if (isAuthorized === undefined) {
+        return <div>Loading...</div>;
+    }
 
-  return isAuthorized ? children : <Navigate to="/login" />;
+    return isAuthorized ? children : <Navigate to="/login" />;
 }
-
 export default ProtectedRoute;
